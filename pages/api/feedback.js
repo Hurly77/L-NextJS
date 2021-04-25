@@ -7,13 +7,15 @@ const id = () => {
   return parseInt(id);
 };
 
-const buildFeedbackPath = () => {
+export const buildFeedbackPath = () => {
   const filePath = path.join(process.cwd(), 'data', 'feedback.json');
+  return filePath
 };
 
-const extractFeedback = (filePath) => {
+export const extractFeedback = (filePath) => {
   const fileData = fs.readFileSync(filePath);
   const data = JSON.parse(fileData);
+  return data
 }
 
 const handler = (req, res) => {
@@ -35,7 +37,7 @@ const handler = (req, res) => {
   } else {
     const filePath = buildFeedbackPath()
     const data = extractFeedback(filePath)
-    res.status(200).json({ message: 'This works!' });
+    res.status(200).json(data);
   }
 };
 
